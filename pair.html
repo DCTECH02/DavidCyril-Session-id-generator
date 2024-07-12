@@ -17,30 +17,31 @@
       font-family: Arial, sans-serif;
     }
 
-    .rain {
+    .matrix {
       position: absolute;
-      width: 1px;
+      width: 100%;
       height: 100%;
-      background: transparent;
       overflow: hidden;
       z-index: -1;
+      color: rgba(0, 255, 0, 0.5);
+      font-size: 20px;
+      font-family: monospace;
     }
 
-    .rain:before {
-      content: '';
+    .matrix div {
       position: absolute;
-      top: -100%;
-      left: 50%;
-      width: 2px;
-      height: 30%;
-      background: rgba(255, 255, 255, 0.5);
-      box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-      animation: rain 0.5s linear infinite;
+      width: 20px;
+      height: 100%;
+      top: 0;
+      animation: matrix-fall linear infinite;
     }
 
-    @keyframes rain {
-      to {
-        transform: translateY(100vh);
+    @keyframes matrix-fall {
+      0% {
+        top: -100%;
+      }
+      100% {
+        top: 100%;
       }
     }
 
@@ -166,7 +167,7 @@
   </style>
 </head>
 <body>
-  <div class="rain"></div>
+  <div class="matrix"></div>
   <div class="container">
     <div class="main">
       <div class="box" id="box">
@@ -178,7 +179,7 @@
             <h6>Made By David Cyril⚡.</h6>
             <h6>Enter Your Number with Country Code.</h6>
             <div class="input-container">
-              <input placeholder="234906652xxx" type="number" id="number" placeholder="Enter your Phone Pumber with Cuntry Code" name="">
+              <input placeholder="234906652xxx" type="number" id="number" placeholder="Enter your Phone Number with Country Code" name="">
               <button id="submit">Submit</button>
             </div>
             
@@ -243,18 +244,22 @@
       }
     });
 
-    function createRain() {
-      const rain = document.querySelector('.rain');
-      for (let i = 0; i < 100; i++) {
-        const drop = document.createElement('div');
-        drop.style.left = `${Math.random() * 100}vw`;
-        drop.style.animationDelay = `${Math.random() * 2}s`;
-        rain.appendChild(drop);
+    function createMatrix() {
+      const matrixContainer = document.querySelector('.matrix');
+      const columns = Math.floor(window.innerWidth / 20);
+      for (let i = 0; i < columns; i++) {
+        const column = document.createElement('div');
+        column.style.left = `${i * 20}px`;
+        column.style.animationDuration = `${Math.random() * 5 + 2}s`;
+        matrixContainer.appendChild(column);
+
+        for (let j = 0; j < 30; j++) {
+          const char = document.createElement('span');
+          char.innerText = String.fromCharCode(0x30A0 + Math.random() * 96);
+          column.appendChild(char);
+        }
       }
     }
 
-    createRain();
-  </script>
-</body>
-</html>
+    createMatrix();
  
