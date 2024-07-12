@@ -62,7 +62,6 @@
       border-radius: 10px;
       transform: perspective(1000px) rotateY(0deg);
       box-shadow: 0 0 20px rgba(250, 249, 249, 0.7);
-      position: relative;
     }
 
     #text {
@@ -197,7 +196,6 @@
     let a = document.getElementById("pair");
     let b = document.getElementById("submit");
     let c = document.getElementById("number");
-    let box = document.getElementById("box");
 
     async function Copy() {
       let text = document.getElementById("copy").innerText;
@@ -208,7 +206,7 @@
       obj.size = "5";
       setTimeout(() => {
         obj.innerText = text;
-        obj.style = "color:white;font-weight-bold";
+        obj.style = "color:white;font-weight:bold";
         obj.size = "5";
       }, 500);
     }
@@ -262,5 +260,6 @@
     }
 
     createMatrix();
- 
- 
+  </script>
+</body>
+</html>
